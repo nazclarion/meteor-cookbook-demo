@@ -1,0 +1,20 @@
+<template name="IndexPage">
+    <div class="w3-center">
+        {{#if isPkg 'Blog'}}
+        <div class="w3-col w3-margin m3 w3-light-grey" style="float: left;">
+            {{> BlogBlock}}
+        </div>
+        {{/if}} {{#if isPkg 'Auth'}}
+        <div class="w3-col w3-margin m3 w3-light-grey" style="float: right;">
+            {{> RegisterBlock}}
+        </div>
+        {{/if}}
+        <div class="w3-margin">
+            <h1>Welcome</h1>
+            <p class="w3-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <hr>
+            <h3>Test</h3>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,17 @@
+div#recipe_info {
+	text-align: center;
+}
+
+.recipe-abstract p {
+	text-align: justify;
+	width: 80%;
+	margin: auto;
+}
+
+.recipe-abstract img {
+	text-align: center;
+	max-width: 420px !important;
+	height: auto;
+	/*float: left;*/
+	margin: 20px;
+}

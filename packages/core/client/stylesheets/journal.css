@@ -1,0 +1,42 @@
+html * {
+    outline: 0 !important;
+}
+
+body {
+  margin-bottom: 40px!important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover, input[type="range"] {
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+input, button, textarea {
+  border-radius: 3px;
+  margin: 3px;
+}
+
+.btn-vertical {
+  padding: 0;
+  margin: 0;
+}
+
+/*.w3-theme-gradient {
+  color: #000 !important;
+  background:-webkit-linear-gradient(top,#64B5F6 25%,#42A5F5 75%)}
+.w3-theme-gradient {
+  color: #000 !important;
+  background:-moz-linear-gradient(top,#64B5F6 25%,#42A5F5 75%)}
+.w3-theme-gradient {
+  color: #000 !important;
+  background:-o-linear-gradient(top,#64B5F6 25%,#42A5F5 75%)}
+.w3-theme-gradient {
+  color: #000 !important;
+  background:-ms-linear-gradient(top,#64B5F6 25%,#42A5F5 75%)}
+.w3-theme-gradient {
+  color: #000 !important;
+  background: linear-gradient(top,#64B5F6 25%,#42A5F5 75%)}*/

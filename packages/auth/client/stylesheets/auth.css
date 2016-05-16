@@ -1,0 +1,9 @@
+/* Account type radio button cursor */
+input[type="radio"], label.w3-validate {
+	cursor: pointer;
+}
+
+/* Account type radio button label color */
+input.w3-radio[type="radio"]:checked + span {
+    color: #009688;
+}

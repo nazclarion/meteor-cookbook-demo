@@ -1,0 +1,153 @@
+<!-- Main -->
+<template name="RecipePage">
+    <div class="w3-margin">
+        {{#if currentUser}}
+        <div class="w3-padding">
+            <ul id="top-nav" class="w3-ul">
+                <li>
+                <!-- Review status: -->
+                    {{# if isAuthor}}
+                        <button data-template="recipe_review_info" class="sg-view sg-toggle w3-btn w3-right w3-indigo"> View reviews </button>
+                    {{/if}}
+                    {{#if isState "active"}}
+                        {{#unless isAuthor}}
+                            <button data-template="recipe_review_make" class="sg-view sg-toggle w3-btn w3-right w3-indigo"> Add review </button>
+                        {{/unless}}
+                        <span class="w3-large w3-text-green"> Active </span>
+                    {{/if}}
+                    {{#if isState "suspended"}}
+                        <span class="w3-large w3-text-lime"> Suspended </span>
+                    {{/if}}
+                    {{#if isState "terminated"}}
+                        <span class="w3-large "> Terminated </span>
+                    {{/if}}
+                </li>
+            </ul>
+        </div>
+        {{/if}}
+        <div class="w3-col w3-padding">
+            {{> Template.dynamic template=tab}}
+        </div>
+    </div>
+</template>
+
+<!-- Common -->
+<template name="recipe_info">
+    <div id="recipe_info">
+        {{#with recipeProfile}}
+        <p class="w3-center w3-padding-left w3-padding-right recipe-title">
+            <h3>{{title}}</h3>
+        </p>
+        <p class="w3-center w3-padding recipe-abstract">
+            {{{abstract}}}
+        </p>
+        {{/with}}
+    </div>
+</template>
+
+<!-- Level 1 -->
+<template name="recipe_review_make">
+    <div class="w3-col m5 w3-left w3-padding">
+        {{>recipe_info}}
+    </div>
+    <div class="w3-col m7 w3-card-2 w3-round">
+        <span data-template="recipe_info" class="sg-view w3-btn w3-tag w3-right w3-red"> &nbsp; &#x2716; &nbsp; </span>
+        <div class="w3-padding">
+            {{>recipe_review_tool}}
+        </div>
+    </div>
+</template>
+<template name="recipe_review_info">
+    <div class="w3-col m5 w3-left w3-padding">
+        {{>recipe_info}}
+    </div>
+    <div class="w3-col m7 w3-card-2 w3-round">
+        <span data-template="recipe_info" class="sg-view w3-btn w3-tag w3-right w3-red"> &nbsp; &#x2716; &nbsp; </span>
+        <div class="w3-padding">
+            {{>recipe_review_stat}}
+        </div>
+    </div>
+</template>
+
+<!-- Level 2 -->
+<template name="recipe_review_tool">
+    <h3>Review this recipe</h3>
+    <form id="recipeReviewForm">
+        <div class="w3-container">
+            <h5>Score recipe:</h5>
+            {{#each reviewCriteria}}
+                <div class="w3-row w3-margin">
+                    <div class="w3-col m3 w3-left">
+                        {{this.name}}
+                    </div>
+                    <div class="w3-col m9 w3-right">
+                        <span class="w3-badge w3-right" style="background-color: rgb(200,0,55);">0</span>
+                        <input class="w3-input w3-col m10 w3-border-0 review-range-slider" name="{{this.name}}" title="{{this.name}}" type="range" min="0" max="100" value="0"/>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="w3-container">
+            <h5>Comment on recipe:</h5>
+            <textarea class="w3-input w3-border w3-round" name="recipe-review-comment" rows="7"></textarea>
+        </div>
+        <div class="w3-row w3-margin">
+            <input class="w3-btn w3-right w3-indigo" type="submit" value="Submit">
+        </div>
+    </form>
+</template>
+<template name="recipe_review_tool_done">
+    <div class="w3-center w3-padding">
+        <div class="w3-padding w3-content">
+            <h3>
+                Dear Reviewer, <br>
+                Thank you for your valuable contribution. <br>
+                Your review has been successfully added to this recipe's profile
+            </h3>
+        </div>
+        <div class="w3-padding">
+            <button data-template="recipe_info" class="sg-view w3-btn w3-indigo"> Return to recipe... </button>
+        </div>
+    </div>
+</template>
+<template name="recipe_review_stat">
+    <div class="w3-row">
+        <nav class="w3-topnav">
+            <h4>&nbsp;</h4>
+            {{#if isAuthor}}
+                {{#if isState "active"}}<button data-state="suspended" class="w3-btn w3-lime sg-state">Suspend</button>{{/if}}
+                {{#if isState "suspended"}}<button data-state="active" class="w3-btn w3-green sg-state">Activate</button>{{/if}}
+                {{#if isState "terminated"}}
+                    <button data-state="active" class="w3-btn w3-green sg-state">Activate</button>
+                    <button data-state="suspended" class="w3-btn w3-lime sg-state">Suspend</button>
+                {{else}}
+                    <button data-state="terminated" class="w3-btn w3-pink sg-state">Terminate</button>
+                {{/if}}
+            {{/if}}
+        </nav>
+    </div>
+    <div class="w3-row-padding">
+        <div class="w3-col m12 w3-left w3-padding w3-responsive">
+            <table class="w3-table w3-striped w3-border w3-bordered w3-card-2">
+                <caption class="w3-large">Reviews</caption>
+                <thead>
+                    <tr class="w3-theme-light">
+                        <th width="25%">Reviewer</th>
+                        <th width="15%">Score</th>
+                        <th width="60%">Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dataReview}}
+                        <tr>
+                            <td><a href="{{pathFor 'review.page' id=_id}}">{{username}}</a></td>
+                            <td>{{score}}</td>
+                            <td>{{comment}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <h4>Overall score: {{consensusScore}}</h4>
+        </div>
+    </div>
+</template>

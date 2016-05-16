@@ -1,0 +1,51 @@
+<template name="LoginBlock">
+    {{#unless loggingIn }} {{#if currentUser}} {{> LoggedBlock}} {{else}}
+    <div class="w3-container w3-margin-top">
+        <form>
+            <div class="w3-row">
+                <div class="w3-col m5 w3-padding-right">
+                    <input class="w3-input w3-card-2 w3-small w3-theme-light" name="loginEmail" id="email" value="" tabindex="1" type="email" placeholder="Email" required>
+                </div>
+                <div class="w3-col m5 w3-padding-right">
+                    <input class="w3-input w3-card-2 w3-small w3-theme-light" name="loginPassword" id="pass" tabindex="2" type="password" placeholder="Password" required>
+                </div>
+                <div class="w3-col m2">
+                    <input class="w3-btn w3-small w3-theme w3-theme-action" value="Sign In" tabindex="4" id="loginSubmit" type="submit">
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col m5 w3-padding-right">
+                    <label class="w3-validate">
+                        <input name="loginPersist" value="1" tabindex="3" type="checkbox" disabled> <span class="w3-small">Remember</span>
+                    </label>
+                </div>
+                <div class="w3-col m7">
+                    <a href="/recover" class="w3-small">Forgot password?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{/if}} {{/unless}}
+</template>
+<template name="LoggedBlock">
+    <div class="w3-container w3-margin-top">
+        <div class="w3-row">
+            <div class="w3-right">
+                <span>{{loggedName}}</span>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-right">
+                <button class="w3-btn w3-small w3-theme w3-theme-action" id="signOut_btn"> Sign Out &nbsp; <i class="fa fa-sign-out"></i></button>
+            </div>
+            <div class="w3-right">
+                <button class="w3-btn w3-small w3-theme w3-theme-action" id="profile_btn"> <i class="fa fa-user"></i> &nbsp; Home </button>
+            </div>
+        </div>
+    </div>
+</template>
+<template name="please_login_page">
+    <div class="w3-center">
+        <h1>Please, login</h1>
+    </div>
+</template>

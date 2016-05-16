@@ -1,0 +1,52 @@
+<!-- Main -->
+<template name="SitemapPage">
+	<div class="w3-container">
+		<div class="w3-row">
+			{{#if Template.subscriptionsReady}}
+			{{#if demo}}
+				<button id="stopDemo" class="sg-action w3-btn w3-red" value="Stop Demo"><i class="fa fa-spinner fa-spin"></i>&nbsp; Stop Demo &nbsp;<i class="fa fa-stop"></i></button>
+			{{else}}
+				<button id="startDemo" class="sg-action w3-btn w3-indigo" value="Start Demo">Start Demo &nbsp;<i class="fa fa-play"></i></button>
+			{{/if}}
+			<hr>
+			{{/if}}
+			<div class="w3-col w3-third w3-center">
+				<span class="w3-large">Users:</span>
+				{{#each userList}}
+					<a href="{{pathFor 'profile.page' id=_id}}">
+						<div class="w3-card-2 w3-padding w3-margin w3-left-align {{#if loggedIn _id}}w3-theme-light{{/if}}">
+							<div class="w3-right">
+								<p class="btn-vertical"><button id="signInUser" data-id="{{profile.name}}" class="sg-action w3-right w3-btn w3-indigo">Sign In</button></p>
+								{{#if loggedIn _id}}
+								{{else}}
+									{{#if inSubscribed _id}}
+									<p class="btn-vertical"><button id="unsubscribe" data-id="{{_id}}" class="sg-action w3-right w3-btn w3-theme-l5">Unsubscribe</button></p>
+									{{else}}
+									<p class="btn-vertical"><button id="subscribe" data-id="{{_id}}" class="sg-action w3-right w3-btn w3-theme-l4">Subscribe</button></p>
+									{{/if}}
+								{{/if}}
+							</div>
+							<h5><i class="fa fa-user fa-2x"></i>&nbsp; {{profile.firstName}} {{profile.lastName}}</h5><h6>{{profile.affiliation}}</h6>
+						</div>
+					</a>
+				{{/each}}
+			</div>
+			<div class="w3-col w3-twothird w3-center">
+				<span class="w3-large">Recipes:</span>
+				{{#each recipeList}}
+					<a href="{{pathFor 'recipe.page' id=_id}}">
+						<div class="w3-card-2 w3-margin">
+							<span class="w3-tag w3-right w3-white">{{prettyDate public._created}}</span>
+							<span class="w3-tag w3-left w3-theme-light">{{recipeAuthorName _id}}</span>
+							<span class="w3-tag w3-left w3-white">{{public.status}}</span>
+							<br>
+							<div class="w3-padding">
+								<h4 class="w3-justify">{{public.title}}</h4>
+							</div>
+						</div>
+					</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,37 @@
+<template name="register_page">
+    <div class="w3-center">
+        <div class="w3-col m4 w3-light-grey">{{> register}}</div>
+    </div>
+</template>
+<template name="RegisterBlock">
+    {{#unless loggingIn }} {{#unless currentUser}}
+    <div class="w3-container w3-theme-light">
+        <h2 class="w3-text-theme">Sign Up</h2>
+    </div>
+    <form class="w3-container">
+        <div class="w3-row w3-margin-top">
+            <div class="w3-half w3-padding-right">
+                <input name="reg_firstName" class="w3-input w3-card-2" type="text" placeholder="First name" required>
+            </div>
+            <div class="w3-half">
+                <input name="reg_lastName" class="w3-input w3-card-2" type="text" placeholder="Last name" required>
+            </div>
+        </div>
+        <div class="w3-row">
+            <input name="reg_affiliation" class="w3-input w3-card-2" type="text" placeholder="Affiliation" required>
+        </div>
+        <div class="w3-row">
+            <input name="reg_email" class="w3-input w3-card-2" type="email" placeholder="Email" required>
+        </div>
+        <div class="w3-row">
+            <input name="" class="w3-input w3-card-2" type="email" placeholder="Re-enter email" required>
+        </div>
+        <div class="w3-row">
+            <input name="reg_password" class="w3-input w3-card-2" type="password" placeholder="Password" required>
+        </div>
+        <input class="w3-btn w3-theme w3-theme-action" value="Sign Up" type="submit">
+        <br>
+        <br>
+    </form>
+    {{/unless}} {{/unless}}
+</template>

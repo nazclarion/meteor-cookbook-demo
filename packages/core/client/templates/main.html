@@ -1,0 +1,47 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cookbook</title>
+</head>
+<template name="defaultLayout">
+    {{> yield "header"}}
+    <div id="content" class="w3-row w3-container w3-padding">
+        {{> yield}}
+    </div>
+    {{> yield "footer"}}
+</template>
+<template name="headerFooterLayout">
+    {{>header}}
+    <div id="content" class="w3-row w3-container w3-padding">
+        {{> yield}}
+    </div>
+    {{>footer}}
+</template>
+<template name="header">
+    <header id="header" class="w3-topnav w3-large w3-theme w3-theme-gradient">
+        <div class="w3-row-padding">
+            {{#if isPkg 'Auth'}}
+            <div class="w3-col l4 m6 s6 w3-right">
+                {{> LoginBlock}}
+            </div>
+            {{/if}}
+            <div class="w3-col l2 m3 s6 w3-left">
+                <h1><a href="{{pathFor 'index.page'}}"><!-- <i class="fa fa-cutlery"></i>&nbsp; -->Cookbook</a></h1>
+            </div>
+            <!-- {{#if currentUser}} -->
+                {{#if isPkg 'Search'}}
+                    <div class="w3-col l3 m6 w3-hide-small w3-margin-top">
+                        {{> searchForm}}
+                    </div>
+                    {{> searchButton}}
+                {{/if}}
+            <!-- {{/if}} -->
+        </div>
+    </header>
+</template>
+<template name="footer">
+    <footer id="footer" class="w3-row w3-container w3-bottom w3-theme-light">
+        <h6>Nazclarion &copy; {{year}}
+        <a href="{{pathFor 'sitemap.page'}}"><div class="w3-btn w3-yellow"><b>Live DEMO</b></div></a>
+        </h6>
+    </footer>
+</template>

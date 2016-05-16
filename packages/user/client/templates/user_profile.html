@@ -1,0 +1,126 @@
+<template name="ProfilePage">
+    <div class="w3-margin">
+        <div class="w3-col l3 m5 s6 w3-left w3-padding">
+            <ul id="side-nav" class="w3-ul">
+                <li data-template="profile_info">Information</li>
+            </ul>
+            {{#if isOwner}}
+            <br>
+            <h6 class="w3-tag">Account</h6>
+            <ul id="side-nav" class="w3-ul">
+                <li data-template="profile_recipes">
+                    <button data-template="newRecipe" class="w3-btn w3-tiny w3-indigo w3-right"> Add new </button>Recipes</li>
+            </ul>
+            {{/if}}
+        </div>
+        <div class="w3-col l9 m7 s6 w3-right w3-padding">
+            {{> Template.dynamic template=tab}}
+        </div>
+    </div>
+</template>
+<template name="profile_info">
+    <div id="profile_info">
+        {{#with userProfile}}
+        <p>
+            <h3>{{profile.firstName}} {{profile.lastName}}{{#if profile.title}}, {{profile.title}}{{/if}}</h3>
+        </p>
+        <p>
+            <h6>{{profile.affiliation}}<br>{{#if profile.position}}{{profile.position}}{{/if}}</h6>
+        </p>
+        {{#if rating}}
+        <p>
+            <b>Rating: {{rating}}</b>
+        </p>
+        {{/if}}
+        <p>
+            {{#if profile.summary}}
+            <h4>Interests:</h4>
+            <p class="w3-justify">{{profile.summary}}</p>
+            {{/if}}
+        </p>
+        {{/with}}
+    </div>
+</template>
+<template name="profile_recipes">
+    <div id="profile_recipes">
+        <h4>Recipes</h4>
+        <ul class="w3-ul">
+            {{#each userRecipes}} {{#if isState "active"}}
+            <a href="{{pathFor 'recipe.page' id=_id}}">
+                <div class="w3-card-2 w3-round w3-margin">
+                    <span class="w3-tag w3-right w3-white">{{prettyDate public._created}}</span>
+                    <span class="w3-tag w3-left w3-green">{{this.public.status}}</span>
+                    <!-- <span class="w3-tag w3-left w3-white">{{recipeAuthorName _id}}</span> -->
+                    <li class="w3-row">
+                        <div class="w3-col m9">
+                            <h5>{{this.public.title}}</h5>
+                        </div>
+                        <div class="w3-col m3 w3-right">
+                            <button id="{{this._id}}" data-state="terminated" class="changeRecipeState w3-btn w3-tiny w3-pink w3-right"> Terminate </button>
+                            <button id="{{this._id}}" data-state="suspended" class="changeRecipeState w3-btn w3-tiny w3-lime w3-right"> Suspend </button>
+                        </div>
+                    </li>
+                </div>
+            </a>
+            {{/if}} {{#if isState "suspended"}}
+            <a href="{{pathFor 'recipe.page' id=_id}}">
+                <div class="w3-card-2 w3-round w3-margin">
+                    <span class="w3-tag w3-right w3-white">{{prettyDate public._created}}</span>
+                    <span class="w3-tag w3-left w3-lime">{{this.public.status}}</span>
+                    <!-- <span class="w3-tag w3-left w3-white">{{recipeAuthorName _id}}</span> -->
+                    <li class="w3-row">
+                        <div class="w3-col m9">
+                            <h5>{{this.public.title}}</h5>
+                        </div>
+                        <div class="w3-col m3 w3-right">
+                            <button id="{{this._id}}" data-state="terminated" class="changeRecipeState w3-btn w3-tiny w3-pink w3-right"> Terminate </button>
+                            <button id="{{this._id}}" data-state="active" class="changeRecipeState w3-btn w3-tiny w3-green w3-right"> Activate </button>
+                        </div>
+                    </li>
+                </div>
+            </a>
+            {{/if}}{{/each}}
+        </ul>
+        <h4>Archived</h4>
+        <ul class="w3-ul">
+            {{#each userRecipes}} {{#if this._id}} {{#if isState "terminated"}}
+            <a href="{{pathFor 'recipe.page' id=_id}}">
+                <div class="w3-card-2 w3-round w3-margin">
+                    <span class="w3-tag w3-right w3-white">{{prettyDate public._created}}</span>
+                    <span class="w3-tag w3-left">{{this.public.status}}</span>
+                    <!-- <span class="w3-tag w3-left w3-white">{{recipeAuthorName _id}}</span> -->
+                    <li class="w3-row">
+                        <div class="w3-col m9">
+                            <h5>{{this.public.title}}</h5>
+                        </div>
+                        <div class="w3-col m3 w3-right">
+                            <button id="{{this._id}}" data-state="suspended" class="changeRecipeState w3-btn w3-tiny w3-lime w3-right"> Suspend </button>
+                            <button id="{{this._id}}" data-state="active" class="changeRecipeState w3-btn w3-tiny w3-green w3-right"> Activate </button>
+                        </div>
+                    </li>
+                </div>
+            </a>
+            {{/if}}{{/if}}{{/each}}
+        </ul>
+    </div>
+</template>
+<template name="newRecipe">
+    <div id="newRecipe">
+        <h4>Create new recipe</h4>
+        <form id="newRecipeForm">
+            <div class="w3-row-padding">
+                <div class="w3-col m9 w3-left">
+                    <div class="w3-row">
+                        <input class="w3-input w3-border" name="newRecipe_title" type="text" placeholder="Title" required>
+                    </div>
+                    <div class="w3-row">
+                        <textarea id="summernote" rows="10" class="w3-input w3-border" name="newRecipe_abstract" placeholder="Abstract" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row">
+                <input id="submitNewRecipe" class="w3-btn w3-indigo w3-right" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</template>

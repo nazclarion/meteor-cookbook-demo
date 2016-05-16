@@ -1,0 +1,10 @@
+/*.search-result-div p {
+	padding: 5px;
+}
+*/
+.search-result-div img {
+	float: left;
+	margin: 0px 10px 20px 10px;
+	max-height: 160px;
+	width: auto;
+}

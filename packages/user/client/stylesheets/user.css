@@ -1,0 +1,18 @@
+/* Menus */
+ul#side-nav li.active, ul#side-nav li:hover {
+    background-color: #CCC;
+    cursor: pointer;
+    transition: .5s;
+}
+
+input:checked + span {
+	color: #009688;
+}
+
+ul.w3-ul li {
+	padding: 6px 6px 10px 16px !important;
+}
+
+li input, li button {
+	margin: 0 3px 0 3px !important;
+}
