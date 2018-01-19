@@ -1,6 +1,21 @@
 # meteor-cookbook-demo
 [Meteor cookbook demo](https://cookbook.demo.nazclarion.com/)
 
+
+### Install
+
+```
+meteor npm install
+```
+
+
+### Run
+
+```
+meteor
+```
+
+
 ### Description
 
 This is a demo version of a social network with a simulation of activity of different users.
