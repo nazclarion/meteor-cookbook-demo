@@ -50,7 +50,7 @@ Template.recipe_info.helpers({
 			_id: Router.current().params.id
 		});
 		if (!recipe) {
-			Router.go('sitemap.page');
+			Router.go('demo.page');
 		}
 		return recipe && recipe.public ? recipe.public : [];
 	}

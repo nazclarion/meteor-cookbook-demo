@@ -1,6 +1,6 @@
 Package.describe({
-  name: 'journal:lib',
-  version: '0.0.1',
+  name: 'cookbook:lib',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: '',
   // URL to the Git repository containing the source code for this package.
@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   var packages = [
-    'iron:router@1.0.12',
+    'iron:router@1.1.2',
     'reactive-var',
     'accounts-base',
     'accounts-password',
@@ -36,6 +36,6 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('journal:lib');
+  api.use('cookbook:lib');
   api.addFiles('lib-tests.js');
 });

@@ -1,3 +1,6 @@
+import Feedparser from 'feedparser';
+import request from 'request';
+
 // Global variables
 globalTimeouts = [];
 globalIntervals = [];
@@ -278,7 +281,6 @@ Meteor.startup(function() {
 
 	// Run demo once
 	globalTimeouts.push(runDemoOnce(10000, 200, false));
-	console.log(' -------------- ');
 });
 
 Meteor.publish('alerts', function() {

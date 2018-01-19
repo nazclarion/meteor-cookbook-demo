@@ -1,5 +1,5 @@
-Router.route('/sitemap', {
-  name: 'sitemap.page',
+Router.route('/demo', {
+  name: 'demo.page',
   subscriptions: function() {
     this.subscribe('userById', this.params.id);
     this.subscribe('userById', Meteor.userId());
@@ -15,7 +15,7 @@ Router.route('/sitemap', {
   }
 });
 
-Template.SitemapPage.onCreated(function() {
+Template.DemoPage.onCreated(function() {
   // Init
   var instance = this;
   instance.demoMode = new ReactiveVar(false);
@@ -36,7 +36,7 @@ Template.SitemapPage.onCreated(function() {
   })
 });
 
-Template.SitemapPage.helpers({
+Template.DemoPage.helpers({
   userList: function() {
     return Meteor.users.find({}, {
       sort: {
@@ -66,7 +66,7 @@ Template.SitemapPage.helpers({
   }
 });
 
-Template.SitemapPage.events({
+Template.DemoPage.events({
   'click #signInUser.sg-action': function(event) {
     event.stopPropagation();
     event.preventDefault();

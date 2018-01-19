@@ -1,6 +1,6 @@
 Package.describe({
-  name: 'journal:recipe',
-  version: '0.0.1',
+  name: 'cookbook:recipe',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: '',
   // URL to the Git repository containing the source code for this package.
@@ -14,7 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
 
   var packages = [
-    'journal:lib'
+    'cookbook:lib'
   ]
 
   api.use(packages);
@@ -34,6 +34,6 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('journal:recipe');
+  api.use('cookbook:recipe');
   api.addFiles('recipe-tests.js');
 });
